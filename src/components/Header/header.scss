@@ -5,13 +5,23 @@
     padding: 1rem 2rem 1rem 2rem;
     background-color: #f8f9fa;
     border-bottom: 1px solid #e9ecef;
+    max-width: 100vw;
+    box-sizing: border-box;
     width: 100%;
-    position: fixed;
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
 
     .logo {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #343a40;
-        cursor: pointer;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #343a40;
+      cursor: pointer;
+      max-width: 100%;
+      height: auto;
     }
+  }
 }

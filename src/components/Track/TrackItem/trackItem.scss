@@ -1,0 +1,137 @@
+.track-item-container {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap; // Дозволяє елементам переноситись
+  gap: 1rem;
+  padding: 1rem 0;
+
+  .date-time {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    min-width: 120px; // Мінімальна ширина для дати/часу
+    padding-right: 1.5rem;
+    box-sizing: border-box;
+
+    .date {
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .time {
+      font-size: 0.9rem;
+      color: #666;
+      white-space: nowrap;
+    }
+  }
+
+  .event-info {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-left: 1.5rem;
+    flex: 1;
+    min-width: 200px;
+    margin-left: 0.5rem;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 16px;
+      height: 16px;
+      margin-top: 0.225rem;
+      margin-left: -1rem;
+      border: 2px solid rgb(25, 107, 184);
+      border-radius: 50%;
+      background: white;
+      z-index: 2;
+    }
+
+    .vertical-line {
+      position: absolute;
+      top: 1.7rem;
+      left: 1px;
+      bottom: 0;
+      width: 2px;
+      margin-left: -0.6rem;
+      background-color: rgb(20, 102, 224);
+      z-index: 1;
+    }
+
+    .service-info {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+
+      .courier-icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .courier-name {
+        font-size: 1.1rem;
+      }
+    }
+
+    .text {
+      font-size: 0.95rem;
+      color: #333;
+      margin: 0;
+    }
+  }
+
+
+  &.passed .event-info::before {
+    background-color: rgb(49, 221, 49);
+    border-color: rgb(49, 221, 49);
+  }
+
+  &.now .event-info::before {
+    background-color: rgb(20, 102, 224);
+  }
+
+  &.future .event-info::before {
+    background-color: white;
+  }
+
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+    margin-left: 0.5rem;
+
+    .date-time {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      padding-right: 0;
+      padding-left: 2rem; // Вирівнюємо з основним контентом
+      width: 100%;
+      gap: 1rem;
+
+      .date, .time {
+        font-size: 0.9rem;
+      }
+    }
+
+    .event-info {
+      padding-left: 2rem;
+      margin-top: 0.5rem;
+      margin-left: 0;
+
+      &::before {
+        margin-left: -1.3rem;
+      }
+
+      .vertical-line {
+        margin-left: -0.95rem;
+      }
+    }
+  }
+}

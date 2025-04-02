@@ -1,0 +1,74 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  .track-section {
+    display: flex;
+
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    background-color: #fff;
+    padding: 2rem;
+
+    .track-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      text-align: center;
+
+      .track-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .track-description {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #666;
+        margin-bottom: 1.5rem;
+      }
+
+      .track-form {
+        display: flex;
+        gap: 0.75rem;
+        width: 100%;
+        max-width: 600px;
+        justify-content: center;
+
+        .track-input {
+          flex: 1;
+          font-size: 1rem;
+        }
+
+        .track-button {
+          font-size: 1rem;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .track-list-section {
+
+
+    .track-list-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .track-list-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+

@@ -1,14 +1,14 @@
-import { Image } from "@heroui/react";
+import { Image } from "@heroui/image";
 import "./header.scss";
 
 export const Header: React.FC = () => {
     return (
-        <div className="header">
+        <header className="header">
             <div className="header-container">
                 <div className="logo">
                     <Image width="250px" alt="logo image" src="/logov2.png" />
                 </div>
             </div>
-        </div>
+        </header>
     );
 };
