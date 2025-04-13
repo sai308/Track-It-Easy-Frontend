@@ -33,8 +33,8 @@ export const RegisterPage: React.FC = () => {
     };
 
     return (
-        <div className="container">
-            <div className="register-container">
+        <div className="register-container">
+            <div className="register-section">
                 <div className="image-container">
                     <Image
                         width="400px"
@@ -47,26 +47,34 @@ export const RegisterPage: React.FC = () => {
                     <form className="register-form" onSubmit={handleSubmit}>
                         <div className="form-group">
                             <Input
+                                className="form-input"
                                 isRequired
                                 placeholder="Username"
                                 type="text"
                             />
                             <Input
+                                className="form-input"
                                 isRequired
                                 placeholder="Email"
                                 type="email"
                             />
                             <Input
+                                className="form-input"
                                 isRequired
                                 placeholder="Password"
                                 type="password"
                             />
                             <Input
+                                className="form-input"
                                 isRequired
                                 placeholder="Confirm Password"
                                 type="password"
                             />
-                            <Button color="primary" type="submit">
+                            <Button
+                                className="submit-button"
+                                color="primary"
+                                type="submit"
+                            >
                                 Create account
                             </Button>
                         </div>

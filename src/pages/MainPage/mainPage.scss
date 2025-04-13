@@ -56,7 +56,9 @@
   }
 
   .track-list-section {
-
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
 
     .track-list-content {
       display: flex;

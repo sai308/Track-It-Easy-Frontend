@@ -2,12 +2,12 @@ import { Button } from "@heroui/button";
 import { Image } from "@heroui/image";
 import { Input } from "@heroui/input";
 import { useNavigate } from "react-router-dom";
-import { config } from "../../config";
-import API from "../../config/axios.config";
+import { useAuth } from "../../context/AuthContext";
 import "./loginPage.scss";
 
 export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -15,20 +15,14 @@ export const LoginPage: React.FC = () => {
         const email = (form[0] as HTMLInputElement).value;
         const password = (form[1] as HTMLInputElement).value;
 
-        API.post(`${config.SERVER_URL}/auth/login`, {
-            email,
-            password,
-        }).then((response) => {
-            console.log(response.data);
-            sessionStorage.setItem("accessToken", response.data.accessToken);
+        login(email, password);
 
-            navigate("/");
-        });
+        navigate("/");
     };
 
     return (
-        <div className="container">
-            <div className="login-container">
+        <div className="login-container">
+            <div className="login-section">
                 <div className="form-container">
                     <h1>Hello Again!</h1>
                     <form className="login-form" onSubmit={handleSubmit}>
