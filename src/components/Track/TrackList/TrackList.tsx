@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { TrackingEvent } from "../../../api/TrackApi";
 import { TrackDetails } from "../TrackDetails/TrackDetails";
 import { TrackItem } from "../TrackItem/TrackItem";
@@ -9,10 +8,6 @@ interface TrackListProps {
 }
 
 export const TrackList: React.FC<TrackListProps> = ({ trackingEvent }) => {
-    useEffect(() => {
-        console.log("Tracking event updated:", trackingEvent);
-    }, [trackingEvent]);
-
     const calculateDaysInTransit = () => {
         if (!trackingEvent.movementHistory?.length) return 0;
 
@@ -52,6 +47,7 @@ export const TrackList: React.FC<TrackListProps> = ({ trackingEvent }) => {
                             daysInTransit: calculateDaysInTransit(),
                             fromLocation: trackingEvent.fromLocation,
                             toLocation: trackingEvent.toLocation,
+                            isFollowed: trackingEvent.isFollowed,
                             weight: trackingEvent.factualWeight || 0,
                             status: trackingEvent.status as
                                 | "in-transit"

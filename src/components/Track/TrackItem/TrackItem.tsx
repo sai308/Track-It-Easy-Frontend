@@ -1,5 +1,7 @@
 import "./trackItem.scss";
 
+import NovaPoshtaLogo from "../../../assets/logos/nova-poshta.svg";
+
 interface TrackEventItemProps {
     status: string;
     description: string;
@@ -37,7 +39,7 @@ export const TrackItem: React.FC<TrackEventItemProps> = (data) => {
                 <div className="vertical-line"></div>
                 <span className="service-info">
                     <span className="courier-icon">
-                        <img src="/nova-poshta.svg" alt="Courier Icon" />
+                        <img src={NovaPoshtaLogo} alt="Courier Icon" />
                     </span>
                     <span className="courier-name">Нова Пошта</span>
                 </span>
