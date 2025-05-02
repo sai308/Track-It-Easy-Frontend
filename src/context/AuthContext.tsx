@@ -14,6 +14,8 @@ interface User {
     id: string;
     email: string;
     username: string;
+    role: string;
+    createdAt: string;
 }
 
 interface AuthContextType {
@@ -23,6 +25,8 @@ interface AuthContextType {
     logout: () => void;
     isAuthenticated: boolean;
     loading: boolean;
+    error: string | null;
+    clearError: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -33,6 +37,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     const [user, setUser] = useState<User | null>(null);
     const [token, setToken] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -75,8 +80,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         initializeAuth();
     }, []);
 
+    const clearError = () => setError(null);
+
     const login = async (email: string, password: string) => {
         try {
+            setError(null);
             const response = await API.post(`${config.SERVER_URL}/auth/login`, {
                 email,
                 password,
@@ -89,7 +97,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
             setUser(user);
             navigate("/");
         } catch (error) {
+            const axiosError = error as AxiosError;
             console.error("Login failed", error);
+
+            if (axiosError.response?.status === 401) {
+                setError("Неправильний email або пароль");
+            } else {
+                setError("Сталася помилка при вході. Спробуйте ще раз.");
+            }
             throw error;
         }
     };
@@ -108,6 +123,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         logout,
         isAuthenticated: !!token,
         loading,
+        error,
+        clearError,
     };
 
     return (

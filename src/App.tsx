@@ -1,9 +1,11 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Header } from "./components/Header/Header";
 import { AuthProvider } from "./context/AuthContext";
+import { AdminPage } from "./pages/AdminPage/AdminPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
+import { ProtectedRoute } from "./routes/ProtectedRoute";
 import "./styles/app.scss";
 
 function App() {
@@ -21,6 +23,9 @@ function App() {
                                 path="/register"
                                 element={<RegisterPage />}
                             />
+                            <Route element={<ProtectedRoute adminOnly />}>
+                                <Route path="/admin" element={<AdminPage />} />
+                            </Route>
                             <Route path="/" element={<MainPage />} />
                             <Route
                                 path="*"

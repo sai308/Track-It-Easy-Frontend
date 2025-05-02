@@ -7,17 +7,21 @@ import "./loginPage.scss";
 
 export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
-    const { login } = useAuth();
+    const { login, error, clearError } = useAuth();
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const form = event.currentTarget;
         const email = (form[0] as HTMLInputElement).value;
         const password = (form[1] as HTMLInputElement).value;
 
-        login(email, password);
-
-        navigate("/");
+        try {
+            await login(email, password);
+            navigate("/");
+        } catch (error) {
+            console.error("Login failed:", error);
+            // Handle error (e.g., show a message to the user)
+        }
     };
 
     return (
@@ -25,6 +29,17 @@ export const LoginPage: React.FC = () => {
             <div className="login-section">
                 <div className="form-container">
                     <h1>Hello Again!</h1>
+                    {error && (
+                        <div className="error-message">
+                            {error}
+                            <button
+                                onClick={clearError}
+                                className="close-error"
+                            >
+                                ×
+                            </button>
+                        </div>
+                    )}
                     <form className="login-form" onSubmit={handleSubmit}>
                         <div className="form-group">
                             <Input
@@ -32,12 +47,14 @@ export const LoginPage: React.FC = () => {
                                 isRequired
                                 placeholder="Email"
                                 type="email"
+                                onChange={clearError}
                             />
                             <Input
                                 className="form-input"
                                 isRequired
                                 placeholder="Password"
                                 type="password"
+                                onChange={clearError}
                             />
                             <Button
                                 className="submit-button"
