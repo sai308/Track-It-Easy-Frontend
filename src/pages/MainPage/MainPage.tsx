@@ -5,9 +5,9 @@ import { TrackApi, TrackingEvent } from "../../api/TrackApi";
 import { TrackList } from "../../components/Track/TrackList/TrackList";
 import "./mainPage.scss";
 
-import MeestLogo from "../../assets/logos/meest.svg";
-import NovaPoshtaLogo from "../../assets/logos/nova-poshta.svg";
-import UkrPoshtaLogo from "../../assets/logos/ukrposhta.svg";
+import { faqItems } from "../../data/faq";
+import { partners } from "../../data/partners";
+
 import { useAuth } from "../../context/AuthContext";
 
 export const MainPage: React.FC = () => {
@@ -38,50 +38,6 @@ export const MainPage: React.FC = () => {
     const scrollToTop = () => {
         topRef.current?.scrollIntoView({ behavior: "smooth" });
     };
-
-    const partners = [
-        {
-            id: 1,
-            name: "Нова Пошта",
-            logo: NovaPoshtaLogo,
-            description: "Найбільша приватна поштова служба України",
-        },
-        {
-            id: 2,
-            name: "Міст Експрес",
-            logo: MeestLogo,
-            description: "Міжнародні поштові перевезення",
-        },
-        {
-            id: 3,
-            name: "Укрпошта",
-            logo: UkrPoshtaLogo,
-            description: "Державний поштовий оператор України",
-        },
-    ];
-
-    const faqItems = [
-        {
-            id: 1,
-            question: "Що таке трек-номер?",
-            answer: "Трек-номер - це унікальний ідентифікатор поштового відправлення, який дозволяє відстежувати його рух.",
-        },
-        {
-            id: 2,
-            question: "Як відстежити посилку?",
-            answer: "Введіть трек-номер у поле пошуку на нашому сайті та натисніть кнопку 'Відстежити'.",
-        },
-        {
-            id: 3,
-            question: "Скільки чекати посилку?",
-            answer: "Термін доставки залежить від відстані, типу відправлення та поштової служби. Зазвичай це від 1 до 5 днів.",
-        },
-        {
-            id: 4,
-            question: "Як дізнатися номер відстеження?",
-            answer: "Трек-номер зазвичай надає відправник. Ви можете знайти його у квитанції про оплату або у особистому кабінеті поштової служби.",
-        },
-    ];
 
     return (
         <div className="main-container">

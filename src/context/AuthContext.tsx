@@ -109,11 +109,27 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         }
     };
 
-    const logout = () => {
-        sessionStorage.removeItem("accessToken");
-        setToken(null);
-        setUser(null);
-        navigate("/login");
+    const logout = async () => {
+        try {
+            await API.post(
+                `${config.SERVER_URL}/auth/logout`,
+                {},
+                {
+                    withCredentials: true,
+                }
+            );
+        } catch (error) {
+            console.error("Logout error", error);
+        } finally {
+            sessionStorage.removeItem("accessToken");
+            localStorage.removeItem("accessToken");
+            setToken(null);
+            setUser(null);
+            setLoading(false);
+            setError(null);
+
+            navigate("/login", { replace: true });
+        }
     };
 
     const value = {

@@ -1,24 +1,19 @@
 import API from "../config/axios.config";
 
-export interface TrackingEvent {
+export interface Parcel {
     trackingNumber: string;
     status: string;
     factualWeight: number;
     fromLocation: string;
     toLocation: string;
     isFollowed: boolean;
-    movementHistory: MovementHistoryEvent[];
+    trackingEvents: MovementHistoryEvent[];
 }
 
-interface MovementHistoryEvent {
+export interface MovementHistoryEvent {
     statusLocation: string;
     description: string;
     timestamp: string;
-}
-
-interface FollowParcelResponse {
-    trackingNumber: string;
-    userId: string;
 }
 
 export const TrackApi = {
@@ -32,10 +27,13 @@ export const TrackApi = {
             throw new Error("Failed to fetch tracking information");
         }
 
-        return response.data.data as TrackingEvent;
+        return response.data.data as Parcel;
     },
 
-    followParcel: async (trackingNumber: string, userId: string) => {
+    followParcel: async (
+        trackingNumber: string,
+        userId: string
+    ): Promise<void> => {
         const response = await API.post("/follow-parcel", {
             trackingNumber: trackingNumber,
             userId: userId,
@@ -46,11 +44,12 @@ export const TrackApi = {
         if (!response.data) {
             throw new Error("Failed to follow parcel");
         }
-
-        return response.data as FollowParcelResponse;
     },
 
-    unfollowParcel: async (trackingNumber: string, userId: string) => {
+    unfollowParcel: async (
+        trackingNumber: string,
+        userId: string
+    ): Promise<void> => {
         const response = await API.post("/unfollow-parcel", {
             trackingNumber: trackingNumber,
             userId: userId,
@@ -61,7 +60,17 @@ export const TrackApi = {
         if (!response.data) {
             throw new Error("Failed to unfollow parcel");
         }
+    },
 
-        return response.data as FollowParcelResponse;
+    getFollowedParcels: async (userId: string): Promise<Parcel[]> => {
+        const response = await API.post("/followed-parcels", {
+            userId: userId,
+        });
+
+        if (!response.data) {
+            throw new Error("Failed to fetch followed parcels");
+        }
+
+        return response.data;
     },
 };

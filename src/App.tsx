@@ -2,6 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Header } from "./components/Header/Header";
 import { AuthProvider } from "./context/AuthContext";
 import { AdminPage } from "./pages/AdminPage/AdminPage";
+import { FollowedParcelsPage } from "./pages/FollowedParcelsPage/FollowedParcelsPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
@@ -27,6 +28,10 @@ function App() {
                                 <Route path="/admin" element={<AdminPage />} />
                             </Route>
                             <Route path="/" element={<MainPage />} />
+                            <Route
+                                path="/followed-parcels"
+                                element={<FollowedParcelsPage />}
+                            />
                             <Route
                                 path="*"
                                 element={<div>404 Not Found</div>}

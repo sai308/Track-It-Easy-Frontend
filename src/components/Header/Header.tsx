@@ -18,7 +18,12 @@ export const Header: React.FC = () => {
         <header className="header">
             <div className="header-container">
                 <div className="logo">
-                    <Image width="250px" alt="logo image" src="/logov2.png" />
+                    <Image
+                        onClick={() => navigate("/")}
+                        width="250px"
+                        alt="logo image"
+                        src="/logov2.png"
+                    />
                 </div>
                 <div className="user-container">
                     <div className="admin-panel">

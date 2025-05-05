@@ -1,6 +1,7 @@
 import "./trackItem.scss";
 
 import NovaPoshtaLogo from "../../../assets/logos/nova-poshta.svg";
+import { formatDate, formatTime } from "../../../services/date.service";
 
 interface TrackEventItemProps {
     status: string;
@@ -9,24 +10,6 @@ interface TrackEventItemProps {
 }
 
 export const TrackItem: React.FC<TrackEventItemProps> = (data) => {
-    const formatDate = (date: Date) => {
-        const options: Intl.DateTimeFormatOptions = {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-        };
-        return date.toLocaleDateString("uk-UA", options);
-    };
-
-    const formatTime = (date: Date) => {
-        const options: Intl.DateTimeFormatOptions = {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-        };
-        return date.toLocaleTimeString("uk-UA", options);
-    };
-
     const eventDate = new Date(data.timestamp);
 
     return (
