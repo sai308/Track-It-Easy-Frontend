@@ -7,7 +7,7 @@ export interface Parcel {
     fromLocation: string;
     toLocation: string;
     isFollowed: boolean;
-    trackingEvents: MovementHistoryEvent[];
+    movementHistory: MovementHistoryEvent[];
 }
 
 export interface MovementHistoryEvent {

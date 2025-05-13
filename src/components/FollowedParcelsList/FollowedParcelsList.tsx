@@ -11,7 +11,6 @@ const FollowedParcelsList: React.FC<FollowedParcelsListProps> = ({
 }) => {
     return (
         <div className="followed-parcels-list">
-            <h2>Followed Parcels</h2>
             <ul className="parcels-list">
                 {parcels.map((parcel) => {
                     const currentEvent = parcel.trackingEvents.find(

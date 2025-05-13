@@ -1,22 +1,22 @@
-import { TrackingEvent } from "../../../api/TrackApi";
+import { Parcel } from "../../../api/TrackApi";
 import { TrackDetails } from "../TrackDetails/TrackDetails";
 import { TrackItem } from "../TrackItem/TrackItem";
 import "./trackList.scss";
 
 interface TrackListProps {
-    trackingEvent: TrackingEvent;
+    parcel: Parcel;
 }
 
-export const TrackList: React.FC<TrackListProps> = ({ trackingEvent }) => {
+export const TrackList: React.FC<TrackListProps> = ({ parcel }) => {
     const calculateDaysInTransit = () => {
-        if (!trackingEvent.movementHistory?.length) return 0;
+        if (!parcel?.movementHistory.length) return 0;
 
-        const firstDate = new Date(trackingEvent.movementHistory[0].timestamp);
+        const firstDate = new Date(parcel.movementHistory[0].timestamp);
         const lastDate =
-            trackingEvent.status === "delivered"
+            parcel.status === "delivered"
                 ? new Date(
-                      trackingEvent.movementHistory[
-                          trackingEvent.movementHistory.length - 1
+                      parcel.movementHistory[
+                          parcel.movementHistory.length - 1
                       ].timestamp
                   )
                 : new Date();
@@ -30,7 +30,7 @@ export const TrackList: React.FC<TrackListProps> = ({ trackingEvent }) => {
         <div className="track-list">
             <div className="track-list__content">
                 <div className="track-events">
-                    {trackingEvent.movementHistory?.map((event, index) => (
+                    {parcel.movementHistory?.map((event, index) => (
                         <TrackItem
                             key={`${event.timestamp}-${index}`}
                             status={event.statusLocation}
@@ -43,13 +43,13 @@ export const TrackList: React.FC<TrackListProps> = ({ trackingEvent }) => {
                 <div className="track-details-wrapper">
                     <TrackDetails
                         package={{
-                            trackingNumber: trackingEvent.trackingNumber,
+                            trackingNumber: parcel.trackingNumber,
                             daysInTransit: calculateDaysInTransit(),
-                            fromLocation: trackingEvent.fromLocation,
-                            toLocation: trackingEvent.toLocation,
-                            isFollowed: trackingEvent.isFollowed,
-                            weight: trackingEvent.factualWeight || 0,
-                            status: trackingEvent.status as
+                            fromLocation: parcel.fromLocation,
+                            toLocation: parcel.toLocation,
+                            isFollowed: parcel.isFollowed,
+                            weight: parcel.factualWeight || 0,
+                            status: parcel.status as
                                 | "in-transit"
                                 | "delivered"
                                 | "pending",

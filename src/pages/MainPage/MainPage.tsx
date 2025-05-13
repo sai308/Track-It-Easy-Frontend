@@ -1,7 +1,7 @@
 import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
 import { useRef, useState } from "react";
-import { TrackApi, TrackingEvent } from "../../api/TrackApi";
+import { Parcel, TrackApi } from "../../api/TrackApi";
 import { TrackList } from "../../components/Track/TrackList/TrackList";
 import "./mainPage.scss";
 
@@ -12,7 +12,9 @@ import { useAuth } from "../../context/AuthContext";
 
 export const MainPage: React.FC = () => {
     const [trackingNumber, setTrackingNumber] = useState<string>("");
-    const [trackingEvent, setTrackingEvent] = useState<TrackingEvent>();
+    const [parcel, setParcel] = useState<Parcel>();
+
+    const [error, setError] = useState<string | null>(null);
     const { user } = useAuth();
 
     const topRef = useRef<HTMLDivElement>(null);
@@ -23,15 +25,24 @@ export const MainPage: React.FC = () => {
 
     const handleTrack = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setError(null);
 
         try {
             const response = await TrackApi.trackParcel(
                 trackingNumber,
                 user?.id
             );
-            setTrackingEvent(response);
-        } catch (error) {
+            setParcel(response);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
             console.error("Error tracking parcel:", error);
+            if (error.response?.status === 409) {
+                setError(
+                    "Для відстеження цієї посилки необхідно увійти в аккаунт"
+                );
+            } else {
+                setError("Помилка при відстеженні посилки. Спробуйте пізніше.");
+            }
         }
     };
 
@@ -66,6 +77,7 @@ export const MainPage: React.FC = () => {
                             ВІДСТЕЖИТИ
                         </Button>
                     </form>
+                    {error && <div className="error-message">{error}</div>}
                 </div>
             </section>
 
@@ -73,7 +85,7 @@ export const MainPage: React.FC = () => {
                 <div className="track-list-content">
                     <h2 className="track-list-title">Останні трекінги</h2>
                 </div>
-                {trackingEvent && <TrackList trackingEvent={trackingEvent} />}
+                {parcel && <TrackList parcel={parcel} />}
             </section>
 
             <section className="partners-section">

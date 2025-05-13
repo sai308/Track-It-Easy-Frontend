@@ -60,8 +60,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
                     setToken(accessToken);
                     setUser(user);
-
-                    console.log("Refreshed tokens and user data", user);
                 } catch (error) {
                     const axiosError = error as AxiosError;
                     console.error(
