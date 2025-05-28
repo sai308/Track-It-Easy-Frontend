@@ -1,7 +1,7 @@
 import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
 import { useRef, useState } from "react";
-import { Parcel, TrackApi } from "../../api/TrackApi";
+import { Parcel, TrackApi, TrackParcelResponse } from "../../api/TrackApi";
 import { TrackList } from "../../components/Track/TrackList/TrackList";
 import "./mainPage.scss";
 
@@ -27,12 +27,22 @@ export const MainPage: React.FC = () => {
         event.preventDefault();
         setError(null);
 
+        if (!trackingNumber.trim()) {
+            setError("Будь ласка, введіть трек-номер посилки");
+            return;
+        }
+
         try {
-            const response = await TrackApi.trackParcel(
+            const response: TrackParcelResponse = await TrackApi.trackParcel(
                 trackingNumber,
                 user?.id
             );
-            setParcel(response);
+            if (!response.success) {
+                setError(response.error || "Помилка при відстеженні посилки.");
+                setParcel(undefined);
+                return;
+            }
+            setParcel(response.data);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             console.error("Error tracking parcel:", error);

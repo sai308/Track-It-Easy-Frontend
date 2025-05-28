@@ -1,0 +1,94 @@
+// ParcelsList.module.scss
+.parcels-list {
+  padding: 1rem;
+  max-width: 100rem;
+  margin: 0 auto;
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal {
+    &-content {
+      padding: 1rem;
+    }
+
+    &-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    &-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+  }
+
+  .parcel-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .detail-row {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e2e8f0;
+
+      .detail-label {
+        font-weight: 600;
+        min-width: 120px;
+        color: #64748b;
+      }
+    }
+  }
+
+  .parcels-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      font-weight: 600;
+      background-color: #f8fafc;
+    }
+
+    .actions-cell {
+      .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+    }
+
+    .status-chip {
+      &.delivered {
+        background-color: #f0fdf4;
+        color: #16a34a;
+      }
+      &.returned {
+        background-color: #fef2f2;
+        color: #dc2626;
+      }
+      &.created, &.in_transit {
+        background-color: #fffbeb;
+        color: #d97706;
+      }
+    }
+  }
+
+  .error-message {
+    color: #dc2626;
+    padding: 1rem;
+  }
+}

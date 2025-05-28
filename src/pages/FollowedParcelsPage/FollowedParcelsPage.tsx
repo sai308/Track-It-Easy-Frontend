@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Parcel, TrackApi } from "../../api/TrackApi";
 import FollowedParcelsList from "../../components/FollowedParcelsList/FollowedParcelsList";
 import { useAuth } from "../../context/AuthContext";
-import "./FollowedParcelsPage.scss";
+import "./followedParcelsPage.scss";
 
 export const FollowedParcelsPage: React.FC = () => {
     const [parcels, setParcels] = useState<Parcel[]>([]);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Parcel } from "../../api/TrackApi";
+import { MovementHistoryEvent, Parcel } from "../../api/TrackApi";
 import { FollowedParcelItem } from "./FollowedParcelItem/FollowedParcelItem";
 
 interface FollowedParcelsListProps {
@@ -13,8 +13,9 @@ const FollowedParcelsList: React.FC<FollowedParcelsListProps> = ({
         <div className="followed-parcels-list">
             <ul className="parcels-list">
                 {parcels.map((parcel) => {
-                    const currentEvent = parcel.trackingEvents.find(
-                        (event) => event.statusLocation === "now"
+                    const currentEvent = parcel.movementHistory.find(
+                        (event: MovementHistoryEvent) =>
+                            event.statusLocation === "now"
                     );
 
                     if (!currentEvent) return null;

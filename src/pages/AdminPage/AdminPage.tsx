@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ParcelsList from "../../components/AdminPanel/ParcelsList/ParcelsList";
 import UsersList from "../../components/AdminPanel/UsersList/UsersList";
 import "./adminPage.scss";
 
@@ -30,6 +31,7 @@ export const AdminPage: React.FC = () => {
 
             <div className="admin-page__content">
                 {activeTab === "users" && <UsersList />}
+                {activeTab === "parcels" && <ParcelsList />}
             </div>
         </div>
     );

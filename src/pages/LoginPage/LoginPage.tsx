@@ -20,7 +20,6 @@ export const LoginPage: React.FC = () => {
             navigate("/");
         } catch (error) {
             console.error("Login failed:", error);
-            // Handle error (e.g., show a message to the user)
         }
     };
 

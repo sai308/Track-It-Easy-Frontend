@@ -1,6 +1,13 @@
 import API from "../config/axios.config";
 
+export interface TrackParcelResponse {
+    success: boolean;
+    data?: Parcel;
+    error?: string;
+}
+
 export interface Parcel {
+    id: string;
     trackingNumber: string;
     status: string;
     factualWeight: number;
@@ -17,7 +24,10 @@ export interface MovementHistoryEvent {
 }
 
 export const TrackApi = {
-    trackParcel: async (trackingNumber: string, userId?: string) => {
+    trackParcel: async (
+        trackingNumber: string,
+        userId?: string
+    ): Promise<TrackParcelResponse> => {
         const response = await API.post("/track", {
             trackingNumber: trackingNumber,
             userId: userId,
@@ -27,7 +37,7 @@ export const TrackApi = {
             throw new Error("Failed to fetch tracking information");
         }
 
-        return response.data.data as Parcel;
+        return response.data as TrackParcelResponse;
     },
 
     followParcel: async (
@@ -39,9 +49,7 @@ export const TrackApi = {
             userId: userId,
         });
 
-        console.log("Follow parcel response:", response.data);
-
-        if (!response.data) {
+        if (!response.status || response.status !== 201) {
             throw new Error("Failed to follow parcel");
         }
     },
@@ -55,9 +63,7 @@ export const TrackApi = {
             userId: userId,
         });
 
-        console.log("Unfollow parcel response:", response.data);
-
-        if (!response.data) {
+        if (!response.status || response.status !== 201) {
             throw new Error("Failed to unfollow parcel");
         }
     },
@@ -72,5 +78,21 @@ export const TrackApi = {
         }
 
         return response.data;
+    },
+
+    getAllParcels: async (): Promise<Parcel[]> => {
+        const response = await API.post("/parcels", {});
+
+        if (!response.data) {
+            throw new Error("Failed to fetch all parcels");
+        }
+
+        console.log("All parcels:", response.data);
+
+        return response.data;
+    },
+
+    deleteParcel: async (id: string): Promise<void> => {
+        await API.delete(`/parcels/${id}`);
     },
 };
