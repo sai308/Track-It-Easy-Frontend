@@ -1,5 +1,6 @@
 import axios from "axios";
 import { config } from "../config";
+import { credentialHeaders } from "./credentials";
 
 const API = axios.create({
     baseURL: config.SERVER_URL,
@@ -27,7 +28,8 @@ API.interceptors.request.use(
     async (config) => {
         const token = sessionStorage.getItem("accessToken");
         if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
+            config.headers["x-Authorization"] = `Bearer ${token}`;
+            config.headers.Authorization = credentialHeaders.Authorization;
         }
         return config;
     },
@@ -43,7 +45,11 @@ API.interceptors.response.use(
             originalRequest._retry = true;
             const newToken = await refreshToken();
             if (newToken) {
-                originalRequest.headers.Authorization = `Bearer ${newToken}`;
+                originalRequest.headers[
+                    "x-Authorization"
+                ] = `Bearer ${newToken}`;
+                originalRequest.headers.Authorization =
+                    credentialHeaders.Authorization;
                 return API(originalRequest);
             }
         }
