@@ -1,4 +1,4 @@
-import "./trackItem.scss";
+import styles from "./trackItem.module.scss";
 
 import NovaPoshtaLogo from "../../../assets/logos/nova-poshta.svg";
 import { formatDate, formatTime } from "../../../services/date.service";
@@ -13,20 +13,20 @@ export const TrackItem: React.FC<TrackEventItemProps> = (data) => {
     const eventDate = new Date(data.timestamp);
 
     return (
-        <div className={`track-item-container ${data.status}`}>
-            <div className="date-time">
-                <span className="date">{formatDate(eventDate)}</span>
-                <span className="time">{formatTime(eventDate)}</span>
+        <div className={`${styles["track-item-container"]} ${data.status}`}>
+            <div className={styles["date-time"]}>
+                <span className={styles["date"]}>{formatDate(eventDate)}</span>
+                <span className={styles["time"]}>{formatTime(eventDate)}</span>
             </div>
-            <div className="event-info">
-                <div className="vertical-line"></div>
-                <span className="service-info">
-                    <span className="courier-icon">
+            <div className={styles["event-info"]}>
+                <div className={styles["vertical-line"]}></div>
+                <span className={styles["service-info"]}>
+                    <span className={styles["courier-icon"]}>
                         <img src={NovaPoshtaLogo} alt="Courier Icon" />
                     </span>
-                    <span className="courier-name">Нова Пошта</span>
+                    <span className={styles["courier-name"]}>Нова Пошта</span>
                 </span>
-                <p className="text">{data.description}</p>
+                <p className={styles["text"]}>{data.description}</p>
             </div>
         </div>
     );

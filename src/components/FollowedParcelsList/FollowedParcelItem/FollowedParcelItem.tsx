@@ -1,6 +1,6 @@
 import { MovementHistoryEvent } from "../../../api/TrackApi";
 import { formatDate, formatTime } from "../../../services/date.service";
-import "./followedParcelItem.scss";
+import styles from "./followedParcelItem.module.scss";
 
 interface FollowedParcelItemProps {
     movementHistory: MovementHistoryEvent;
@@ -14,18 +14,26 @@ export const FollowedParcelItem: React.FC<FollowedParcelItemProps> = ({
     const eventDate = new Date(movementHistory.timestamp);
 
     return (
-        <div className="followed-parcel-container">
+        <div className={styles["followed-parcel-container"]}>
             <div>
-                <span className="__tracking-number">{trackingNumber}</span>
+                <span className={styles["__tracking-number"]}>
+                    {trackingNumber}
+                </span>
             </div>
             <div>
-                <div className="__date-time">
-                    <span className="date">{formatDate(eventDate)}</span>
-                    <span className="time">{formatTime(eventDate)}</span>
+                <div className={styles["__date-time"]}>
+                    <span className={styles["date"]}>
+                        {formatDate(eventDate)}
+                    </span>
+                    <span className={styles["time"]}>
+                        {formatTime(eventDate)}
+                    </span>
                 </div>
-                <div className="__event-info">
-                    <div className="__vertical-line"></div>
-                    <p className="__text">{movementHistory.description}</p>
+                <div className={styles["__event-info"]}>
+                    <div className={styles["__vertical-line"]}></div>
+                    <p className={styles["__text"]}>
+                        {movementHistory.description}
+                    </p>
                 </div>
             </div>
         </div>

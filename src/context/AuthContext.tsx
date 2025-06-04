@@ -15,6 +15,7 @@ interface User {
     email: string;
     username: string;
     role: string;
+    apiKey?: string;
     createdAt: string;
 }
 

@@ -29,7 +29,7 @@ import {
 } from "../../../api/UserApi";
 import { useAuth } from "../../../context/AuthContext";
 import { useUserForm } from "../../../hooks/useUserForm";
-import "./usersList.scss";
+import styles from "./usersList.module.scss";
 
 const UsersList: React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
@@ -155,22 +155,23 @@ const UsersList: React.FC = () => {
     };
 
     if (loading) return <Spinner />;
-    if (error) return <div className="text-red-500 p-4">Помилка: {error}</div>;
+    if (error)
+        return <div className={styles["error-message"]}>Помилка: {error}</div>;
 
     return (
-        <div className="users-list">
-            <h1 className="title">Керування користувачами</h1>
+        <div className={styles["users-list"]}>
+            <h1 className={styles["title"]}>Керування користувачами</h1>
 
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="modal-title">
+                            <ModalHeader className={styles["modal-title"]}>
                                 Редагувати користувача
                             </ModalHeader>
                             <ModalBody>
                                 {editingUser && (
-                                    <div className="modal-form">
+                                    <div className={styles["modal-form"]}>
                                         <Input
                                             label="Ім'я користувача"
                                             value={editValues.username}
@@ -218,7 +219,7 @@ const UsersList: React.FC = () => {
                                     </div>
                                 )}
                             </ModalBody>
-                            <ModalFooter className="modal-actions">
+                            <ModalFooter className={styles["modal-actions"]}>
                                 <Button
                                     color="danger"
                                     variant="light"
@@ -238,8 +239,11 @@ const UsersList: React.FC = () => {
                 </ModalContent>
             </Modal>
 
-            <Card title="Додати нового користувача" className="add-user-card">
-                <div className="form-grid">
+            <Card
+                title="Додати нового користувача"
+                className={styles["add-user-card"]}
+            >
+                <div className={styles["form-grid"]}>
                     <Input
                         label="Ім'я користувача"
                         value={form.username}
@@ -285,7 +289,7 @@ const UsersList: React.FC = () => {
                 <Button
                     color="primary"
                     onPress={handleCreateUser}
-                    className="add-button"
+                    className={styles["add-button"]}
                 >
                     Додати користувача
                 </Button>
@@ -294,7 +298,7 @@ const UsersList: React.FC = () => {
             <Card>
                 <Table
                     aria-label="Таблиця користувачів"
-                    className="users-table"
+                    className={styles["users-table"]}
                 >
                     <TableHeader columns={columns}>
                         {(column) => (
@@ -318,7 +322,13 @@ const UsersList: React.FC = () => {
                                                                 ? "danger"
                                                                 : "success"
                                                         }
-                                                        className="role-chip"
+                                                        className={
+                                                            styles[
+                                                                "role-chip"
+                                                            ] +
+                                                            " " +
+                                                            styles[user.role]
+                                                        }
                                                     >
                                                         {user.role}
                                                     </Chip>
@@ -334,8 +344,18 @@ const UsersList: React.FC = () => {
                                             );
                                         case "actions":
                                             return (
-                                                <TableCell className="actions-cell">
-                                                    <div className="action-buttons">
+                                                <TableCell
+                                                    className={
+                                                        styles["actions-cell"]
+                                                    }
+                                                >
+                                                    <div
+                                                        className={
+                                                            styles[
+                                                                "action-buttons"
+                                                            ]
+                                                        }
+                                                    >
                                                         <Button
                                                             size="sm"
                                                             onPress={() =>

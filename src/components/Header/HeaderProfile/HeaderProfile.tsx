@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
-import "./headerProfile.scss";
+import styles from "./headerProfile.module.scss";
 
 interface HeaderProfileProps {
     user: {
@@ -38,6 +38,14 @@ export const HeaderProfile: React.FC<HeaderProfileProps> = ({ user }) => {
         setIsDropdownOpen(!isDropdownOpen);
     };
 
+    const handleAPI = async () => {
+        try {
+            navigate("/api");
+        } catch (error) {
+            console.error("Error navigating to api page:", error);
+        }
+    };
+
     const handleLogout = async () => {
         try {
             logout();
@@ -52,21 +60,31 @@ export const HeaderProfile: React.FC<HeaderProfileProps> = ({ user }) => {
     };
 
     return (
-        <div className="header-profile-container" ref={dropdownRef}>
-            <div className="profile-trigger" onClick={toggleDropdown}>
-                <div className="header-profile-icon">
+        <div className={styles["header-profile-container"]} ref={dropdownRef}>
+            <div className={styles["profile-trigger"]} onClick={toggleDropdown}>
+                <div className={styles["header-profile-icon"]}>
                     <img src="./user.png" alt="User Icon" />
                 </div>
-                <span className="header-profile-name">
+                <span className={styles["header-profile-name"]}>
                     <span>{user.username}</span>
                 </span>
             </div>
 
-            <div className={`profile-dropdown ${isDropdownOpen ? "open" : ""}`}>
-                <div className="dropdown-item" onClick={handleFollowedParcels}>
+            <div
+                className={`${styles["profile-dropdown"]} ${
+                    isDropdownOpen ? styles["open"] : ""
+                }`}
+            >
+                <div
+                    className={styles["dropdown-item"]}
+                    onClick={handleFollowedParcels}
+                >
                     Followed Parcels
                 </div>
-                <div className="dropdown-item" onClick={handleLogout}>
+                <div className={styles["dropdown-item"]} onClick={handleAPI}>
+                    API
+                </div>
+                <div className={styles["dropdown-item"]} onClick={handleLogout}>
                     Logout
                 </div>
             </div>

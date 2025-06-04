@@ -3,7 +3,7 @@ import { Image } from "@heroui/image";
 import { Input } from "@heroui/input";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import "./loginPage.scss";
+import styles from "./loginPage.module.scss";
 
 export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
@@ -24,39 +24,42 @@ export const LoginPage: React.FC = () => {
     };
 
     return (
-        <div className="login-container">
-            <div className="login-section">
-                <div className="form-container">
+        <div className={styles["login-container"]}>
+            <div className={styles["login-section"]}>
+                <div className={styles["form-container"]}>
                     <h1>Hello Again!</h1>
                     {error && (
-                        <div className="error-message">
+                        <div className={styles["error-message"]}>
                             {error}
                             <button
                                 onClick={clearError}
-                                className="close-error"
+                                className={styles["close-error"]}
                             >
                                 ×
                             </button>
                         </div>
                     )}
-                    <form className="login-form" onSubmit={handleSubmit}>
-                        <div className="form-group">
+                    <form
+                        className={styles["login-form"]}
+                        onSubmit={handleSubmit}
+                    >
+                        <div className={styles["form-group"]}>
                             <Input
-                                className="form-input"
+                                className={styles["form-input"]}
                                 isRequired
                                 placeholder="Email"
                                 type="email"
                                 onChange={clearError}
                             />
                             <Input
-                                className="form-input"
+                                className={styles["form-input"]}
                                 isRequired
                                 placeholder="Password"
                                 type="password"
                                 onChange={clearError}
                             />
                             <Button
-                                className="submit-button"
+                                className={styles["submit-button"]}
                                 color="primary"
                                 type="submit"
                             >
@@ -64,16 +67,18 @@ export const LoginPage: React.FC = () => {
                             </Button>
                         </div>
                     </form>
-                    <div className="register-link">
-                        <p className="text-sm">Don't have an account?</p>
-                        <a className="text-sm" href="/register">
+                    <div className={styles["register-link"]}>
+                        <p className={styles["text-sm"]}>
+                            Don't have an account?
+                        </p>
+                        <a className={styles["text-sm"]} href="/register">
                             Register
                         </a>
                     </div>
                 </div>
-                <div className="image-container">
+                <div className={styles["image-container"]}>
                     <Image
-                        className="login-image"
+                        className={styles["login-image"]}
                         width="400px"
                         alt="Login image"
                         src="/login-image.jpg"

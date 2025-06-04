@@ -87,8 +87,6 @@ export const TrackApi = {
             throw new Error("Failed to fetch all parcels");
         }
 
-        console.log("All parcels:", response.data);
-
         return response.data;
     },
 
