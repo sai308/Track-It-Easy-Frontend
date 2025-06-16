@@ -29,6 +29,7 @@ const FollowedParcelsList: React.FC<FollowedParcelsListProps> = ({
                             <FollowedParcelItem
                                 trackingNumber={parcel.trackingNumber}
                                 movementHistory={currentEvent}
+                                courier={parcel.courier}
                             />
                         </li>
                     );

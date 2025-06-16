@@ -10,6 +10,7 @@ export interface Parcel {
     id: string;
     trackingNumber: string;
     status: string;
+    courier: string;
     factualWeight: number;
     fromLocation: string;
     toLocation: string;

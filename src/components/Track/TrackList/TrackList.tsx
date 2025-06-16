@@ -36,6 +36,7 @@ export const TrackList: React.FC<TrackListProps> = ({ parcel }) => {
                             status={event.statusLocation}
                             description={event.description}
                             timestamp={event.timestamp}
+                            courier={parcel.courier}
                         />
                     ))}
                 </div>
