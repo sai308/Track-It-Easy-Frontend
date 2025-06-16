@@ -18,7 +18,7 @@ import {
 } from "@heroui/react";
 import React, { useEffect, useState } from "react";
 import { Parcel, TrackApi } from "../../../api/TrackApi";
-import "./parcelsList.scss";
+import styles from "./parcelsList.module.scss";
 
 const ParcelsList: React.FC = () => {
     const [parcels, setParcels] = useState<Parcel[]>([]);
@@ -78,32 +78,41 @@ const ParcelsList: React.FC = () => {
     };
 
     if (loading) return <Spinner />;
-    if (error) return <div className="text-red-500 p-4">Помилка: {error}</div>;
+    if (error)
+        return <div className={styles["error-message"]}>Помилка: {error}</div>;
 
     return (
-        <div className="parcels-list">
-            <h1 className="title">Список посилок</h1>
+        <div className={styles["parcels-list"]}>
+            <h1 className={styles["title"]}>Список посилок</h1>
 
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="modal-title">
+                            <ModalHeader className={styles["modal-title"]}>
                                 Деталі посилки
                             </ModalHeader>
                             <ModalBody>
                                 {selectedParcel && (
-                                    <div className="parcel-details">
-                                        <div className="detail-row">
-                                            <span className="detail-label">
+                                    <div className={styles["parcel-details"]}>
+                                        <div className={styles["detail-row"]}>
+                                            <span
+                                                className={
+                                                    styles["detail-label"]
+                                                }
+                                            >
                                                 Трек-номер:
                                             </span>
                                             <span>
                                                 {selectedParcel.trackingNumber}
                                             </span>
                                         </div>
-                                        <div className="detail-row">
-                                            <span className="detail-label">
+                                        <div className={styles["detail-row"]}>
+                                            <span
+                                                className={
+                                                    styles["detail-label"]
+                                                }
+                                            >
                                                 Статус:
                                             </span>
                                             <Chip
@@ -116,7 +125,19 @@ const ParcelsList: React.FC = () => {
                                                         ? "danger"
                                                         : "warning"
                                                 }
-                                                className="status-chip"
+                                                className={
+                                                    styles["status-chip"] +
+                                                    " " +
+                                                    styles[
+                                                        selectedParcel.status ===
+                                                        "delivered"
+                                                            ? "delivered"
+                                                            : selectedParcel.status ===
+                                                              "returned"
+                                                            ? "returned"
+                                                            : selectedParcel.status
+                                                    ]
+                                                }
                                             >
                                                 {statuses.find(
                                                     (s) =>
@@ -126,8 +147,12 @@ const ParcelsList: React.FC = () => {
                                                     selectedParcel.status}
                                             </Chip>
                                         </div>
-                                        <div className="detail-row">
-                                            <span className="detail-label">
+                                        <div className={styles["detail-row"]}>
+                                            <span
+                                                className={
+                                                    styles["detail-label"]
+                                                }
+                                            >
                                                 Вага:
                                             </span>
                                             <span>
@@ -135,16 +160,24 @@ const ParcelsList: React.FC = () => {
                                                 кг
                                             </span>
                                         </div>
-                                        <div className="detail-row">
-                                            <span className="detail-label">
+                                        <div className={styles["detail-row"]}>
+                                            <span
+                                                className={
+                                                    styles["detail-label"]
+                                                }
+                                            >
                                                 Звідки:
                                             </span>
                                             <span>
                                                 {selectedParcel.fromLocation}
                                             </span>
                                         </div>
-                                        <div className="detail-row">
-                                            <span className="detail-label">
+                                        <div className={styles["detail-row"]}>
+                                            <span
+                                                className={
+                                                    styles["detail-label"]
+                                                }
+                                            >
                                                 Куди:
                                             </span>
                                             <span>
@@ -154,7 +187,7 @@ const ParcelsList: React.FC = () => {
                                     </div>
                                 )}
                             </ModalBody>
-                            <ModalFooter className="modal-actions">
+                            <ModalFooter className={styles["modal-actions"]}>
                                 <Button color="primary" onPress={onClose}>
                                     Закрити
                                 </Button>
@@ -165,7 +198,10 @@ const ParcelsList: React.FC = () => {
             </Modal>
 
             <Card>
-                <Table aria-label="Таблиця посилок" className="parcels-table">
+                <Table
+                    aria-label="Таблиця посилок"
+                    className={styles["parcels-table"]}
+                >
                     <TableHeader columns={columns}>
                         {(column) => (
                             <TableColumn key={column.key}>
@@ -191,7 +227,21 @@ const ParcelsList: React.FC = () => {
                                                                 ? "danger"
                                                                 : "warning"
                                                         }
-                                                        className="status-chip"
+                                                        className={
+                                                            styles[
+                                                                "status-chip"
+                                                            ] +
+                                                            " " +
+                                                            styles[
+                                                                parcel.status ===
+                                                                "delivered"
+                                                                    ? "delivered"
+                                                                    : parcel.status ===
+                                                                      "returned"
+                                                                    ? "returned"
+                                                                    : parcel.status
+                                                            ]
+                                                        }
                                                     >
                                                         {statuses.find(
                                                             (s) =>
@@ -204,8 +254,18 @@ const ParcelsList: React.FC = () => {
                                             );
                                         case "actions":
                                             return (
-                                                <TableCell className="actions-cell">
-                                                    <div className="action-buttons">
+                                                <TableCell
+                                                    className={
+                                                        styles["actions-cell"]
+                                                    }
+                                                >
+                                                    <div
+                                                        className={
+                                                            styles[
+                                                                "action-buttons"
+                                                            ]
+                                                        }
+                                                    >
                                                         <Button
                                                             size="sm"
                                                             onPress={() =>

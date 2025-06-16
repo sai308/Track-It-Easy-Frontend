@@ -1,7 +1,7 @@
 import { Parcel } from "../../../api/TrackApi";
 import { TrackDetails } from "../TrackDetails/TrackDetails";
 import { TrackItem } from "../TrackItem/TrackItem";
-import "./trackList.scss";
+import styles from "./trackList.module.scss";
 
 interface TrackListProps {
     parcel: Parcel;
@@ -27,20 +27,21 @@ export const TrackList: React.FC<TrackListProps> = ({ parcel }) => {
     };
 
     return (
-        <div className="track-list">
-            <div className="track-list__content">
-                <div className="track-events">
+        <div className={styles["track-list"]}>
+            <div className={styles["track-list__content"]}>
+                <div className={styles["track-events"]}>
                     {parcel.movementHistory?.map((event, index) => (
                         <TrackItem
                             key={`${event.timestamp}-${index}`}
                             status={event.statusLocation}
                             description={event.description}
                             timestamp={event.timestamp}
+                            courier={parcel.courier}
                         />
                     ))}
                 </div>
 
-                <div className="track-details-wrapper">
+                <div className={styles["track-details-wrapper"]}>
                     <TrackDetails
                         package={{
                             trackingNumber: parcel.trackingNumber,

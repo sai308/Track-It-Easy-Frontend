@@ -3,7 +3,7 @@ import { Image } from "@heroui/image";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import PanelSwitch from "../AdminPanel/PanelSwitch/PanelSwitch";
-import "./header.scss";
+import styles from "./header.module.scss";
 import { HeaderProfile } from "./HeaderProfile/HeaderProfile";
 
 export const Header: React.FC = () => {
@@ -15,9 +15,9 @@ export const Header: React.FC = () => {
     }
 
     return (
-        <header className="header">
-            <div className="header-container">
-                <div className="logo">
+        <header className={styles["header"]}>
+            <div className={styles["header-container"]}>
+                <div className={styles["logo"]}>
                     <Image
                         onClick={() => navigate("/")}
                         width="250px"
@@ -25,15 +25,15 @@ export const Header: React.FC = () => {
                         src="/logov2.png"
                     />
                 </div>
-                <div className="user-container">
-                    <div className="admin-panel">
+                <div className={styles["user-container"]}>
+                    <div className={styles["admin-panel"]}>
                         <PanelSwitch />
                     </div>
-                    <div className="profile">
+                    <div className={styles["profile"]}>
                         {isAuthenticated && user ? (
                             <HeaderProfile user={user} />
                         ) : (
-                            <div className="auth-buttons">
+                            <div className={styles["auth-buttons"]}>
                                 <Button
                                     variant="bordered"
                                     onPress={() => navigate("/login")}

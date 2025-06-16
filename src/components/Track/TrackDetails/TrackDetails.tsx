@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TrackApi } from "../../../api/TrackApi";
 import { useAuth } from "../../../context/AuthContext";
-import "./trackDetails.scss";
+import styles from "./trackDetails.module.scss";
 
 interface PackageDetails {
     trackingNumber: string;
@@ -39,9 +39,11 @@ export const TrackDetails: React.FC<{ package: PackageDetails }> = ({
     };
 
     return (
-        <div className="track-details">
-            <div className="track-details__header">
-                <h1 className="track-details__number">{pkg.trackingNumber}</h1>
+        <div className={styles["track-details"]}>
+            <div className={styles["track-details__header"]}>
+                <h1 className={styles["track-details__number"]}>
+                    {pkg.trackingNumber}
+                </h1>
                 <span className={`track-details__status ${pkg.status}`}>
                     {pkg.status}
                 </span>
@@ -72,27 +74,39 @@ export const TrackDetails: React.FC<{ package: PackageDetails }> = ({
                 )}
             </div>
 
-            <div className="track-details__info">
-                <div className="info-card">
-                    <span className="info-card__label">Днів у дорозі:</span>
-                    <span className="info-card__value">
+            <div className={styles["track-details__info"]}>
+                <div className={styles["info-card"]}>
+                    <span className={styles["info-card__label"]}>
+                        Днів у дорозі:
+                    </span>
+                    <span className={styles["info-card__value"]}>
                         {pkg.daysInTransit}
                     </span>
                 </div>
 
-                <div className="info-card">
-                    <span className="info-card__label">Відправник:</span>
-                    <span className="info-card__value">{pkg.fromLocation}</span>
+                <div className={styles["info-card"]}>
+                    <span className={styles["info-card__label"]}>
+                        Відправник:
+                    </span>
+                    <span className={styles["info-card__value"]}>
+                        {pkg.fromLocation}
+                    </span>
                 </div>
 
-                <div className="info-card">
-                    <span className="info-card__label">Отримувач:</span>
-                    <span className="info-card__value">{pkg.toLocation}</span>
+                <div className={styles["info-card"]}>
+                    <span className={styles["info-card__label"]}>
+                        Отримувач:
+                    </span>
+                    <span className={styles["info-card__value"]}>
+                        {pkg.toLocation}
+                    </span>
                 </div>
 
-                <div className="info-card">
-                    <span className="info-card__label">Вага:</span>
-                    <span className="info-card__value">{pkg.weight}</span>
+                <div className={styles["info-card"]}>
+                    <span className={styles["info-card__label"]}>Вага:</span>
+                    <span className={styles["info-card__value"]}>
+                        {pkg.weight}
+                    </span>
                 </div>
             </div>
         </div>

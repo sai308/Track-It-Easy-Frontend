@@ -1,0 +1,120 @@
+.api-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background: #fff;
+  padding: 2rem;
+
+  .api-content {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    background: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.04);
+    padding: 2.5rem 2rem;
+  }
+
+  .api-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    color: #2563eb;
+  }
+
+  .api-desc {
+    margin-bottom: 1.5rem;
+    font-size: 1.15rem;
+    color: #374151;
+  }
+
+  .api-list {
+    margin-bottom: 2rem;
+    text-align: left;
+    color: #374151;
+    li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.2rem;
+      position: relative;
+      &:before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #2563eb;
+      }
+    }
+  }
+
+  .api-btn {
+    display: inline-block;
+    padding: 0.75rem 2.2rem;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow: 0 2px 8px 0 rgba(37,99,235,0.08);
+    transition: background 0.2s;
+    &:hover {
+      background: #1d4ed8;
+    }
+  }
+
+  .api-actions-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+
+    .api-btn {
+      flex: 1 1 0;
+      min-width: 0;
+      white-space: nowrap;
+    }
+  }
+
+  .api-key-block {
+    margin-top: 0.5rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .api-key-label {
+    font-weight: 600;
+    color: #2563eb;
+    margin-bottom: 0.2rem;
+    font-size: 1.05rem;
+  }
+
+  .api-key-value-field {
+    width: 100%;
+    min-height: 2.2rem;
+    background: #e0e7ef;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    word-break: break-all;
+  }
+
+  .api-key-placeholder {
+    color: #64748b;
+    font-style: italic;
+  }
+
+  .api-key-error {
+    color: #dc2626;
+    font-size: 0.98rem;
+    margin-top: 0.2rem;
+  }
+}

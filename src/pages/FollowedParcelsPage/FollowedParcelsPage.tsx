@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Parcel, TrackApi } from "../../api/TrackApi";
 import FollowedParcelsList from "../../components/FollowedParcelsList/FollowedParcelsList";
 import { useAuth } from "../../context/AuthContext";
-import "./followedParcelsPage.scss";
+import styles from "./followedParcelsPage.module.scss";
 
 export const FollowedParcelsPage: React.FC = () => {
     const [parcels, setParcels] = useState<Parcel[]>([]);
@@ -33,7 +33,6 @@ export const FollowedParcelsPage: React.FC = () => {
                 );
                 setParcels(fetchedParcels);
 
-                // Calculate statistics
                 const active = fetchedParcels.length;
                 const inTransit = fetchedParcels.filter(
                     (p) => p.status === "В дорозі"
@@ -55,45 +54,57 @@ export const FollowedParcelsPage: React.FC = () => {
     }, [user, authLoading]);
 
     if (authLoading) {
-        return <div className="loading-message">Loading user data...</div>;
+        return (
+            <div className={styles["loading-message"]}>
+                Loading user data...
+            </div>
+        );
     }
 
     if (error) {
-        return <div className="error-message">{error}</div>;
+        return <div className={styles["error-message"]}>{error}</div>;
     }
 
     return (
-        <div className="followed-parcels-page">
-            <header className="page-header">
+        <div className={styles["followed-parcels-page"]}>
+            <header className={styles["page-header"]}>
                 <h1>Your Followed Parcels</h1>
-                <p className="subtitle">
+                <p className={styles["subtitle"]}>
                     Track all your shipments in one place
                 </p>
             </header>
 
-            <div className="content-container">
-                <div className="stats-card">
-                    <div className="stat-item">
-                        <span className="stat-value">{stats.active}</span>
-                        <span className="stat-label">Active Shipments</span>
+            <div className={styles["content-container"]}>
+                <div className={styles["stats-card"]}>
+                    <div className={styles["stat-item"]}>
+                        <span className={styles["stat-value"]}>
+                            {stats.active}
+                        </span>
+                        <span className={styles["stat-label"]}>
+                            Active Shipments
+                        </span>
                     </div>
-                    <div className="stat-item">
-                        <span className="stat-value">{stats.inTransit}</span>
-                        <span className="stat-label">In Transit</span>
+                    <div className={styles["stat-item"]}>
+                        <span className={styles["stat-value"]}>
+                            {stats.inTransit}
+                        </span>
+                        <span className={styles["stat-label"]}>In Transit</span>
                     </div>
-                    <div className="stat-item">
-                        <span className="stat-value">{stats.delivered}</span>
-                        <span className="stat-label">Delivered</span>
+                    <div className={styles["stat-item"]}>
+                        <span className={styles["stat-value"]}>
+                            {stats.delivered}
+                        </span>
+                        <span className={styles["stat-label"]}>Delivered</span>
                     </div>
                 </div>
 
-                <div className="parcels-section">
+                <div className={styles["parcels-section"]}>
                     {loading ? (
-                        <div className="loading-message">
+                        <div className={styles["loading-message"]}>
                             Loading parcels...
                         </div>
                     ) : parcels.length === 0 ? (
-                        <div className="empty-state">
+                        <div className={styles["empty-state"]}>
                             You're not following any parcels yet.
                         </div>
                     ) : (

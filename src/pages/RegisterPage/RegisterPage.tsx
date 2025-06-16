@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { config } from "../../config";
 import API from "../../config/axios.config";
-import "./registerPage.scss";
+import styles from "./registerPage.module.scss";
 
 export const RegisterPage: React.FC = () => {
     const navigate = useNavigate();
@@ -41,8 +41,7 @@ export const RegisterPage: React.FC = () => {
             email: formData.email,
             password: formData.password,
         })
-            .then((response) => {
-                console.log(response.data);
+            .then(() => {
                 navigate("/login");
             })
             .catch((err) => {
@@ -53,24 +52,29 @@ export const RegisterPage: React.FC = () => {
     };
 
     return (
-        <div className="register-container">
-            <div className="register-section">
-                <div className="image-container">
+        <div className={styles["register-container"]}>
+            <div className={styles["register-section"]}>
+                <div className={styles["image-container"]}>
                     <Image
                         width="400px"
                         alt="Login image"
                         src="/register-image.jpg"
                     />
                 </div>
-                <div className="form-container">
+                <div className={styles["form-container"]}>
                     <h1>Create Account</h1>
                     {submitError && (
-                        <div className="error-message">{submitError}</div>
+                        <div className={styles["error-message"]}>
+                            {submitError}
+                        </div>
                     )}
-                    <form className="register-form" onSubmit={handleSubmit}>
-                        <div className="form-group">
+                    <form
+                        className={styles["register-form"]}
+                        onSubmit={handleSubmit}
+                    >
+                        <div className={styles["form-group"]}>
                             <Input
-                                className="form-input"
+                                className={styles["form-input"]}
                                 isRequired
                                 placeholder="Username"
                                 type="text"
@@ -84,7 +88,7 @@ export const RegisterPage: React.FC = () => {
                                 }}
                             />
                             <Input
-                                className="form-input"
+                                className={styles["form-input"]}
                                 isRequired
                                 placeholder="Email"
                                 type="email"
@@ -92,7 +96,7 @@ export const RegisterPage: React.FC = () => {
                                 onChange={(e) => handleChange(e, "email")}
                             />
                             <Input
-                                className="form-input"
+                                className={styles["form-input"]}
                                 isRequired
                                 placeholder="Password"
                                 type="password"
@@ -106,7 +110,7 @@ export const RegisterPage: React.FC = () => {
                                 }}
                             />
                             <Input
-                                className="form-input"
+                                className={styles["form-input"]}
                                 isRequired
                                 placeholder="Confirm Password"
                                 type="password"
@@ -122,7 +126,7 @@ export const RegisterPage: React.FC = () => {
                                 }}
                             />
                             <Button
-                                className="submit-button"
+                                className={styles["submit-button"]}
                                 color="primary"
                                 type="submit"
                             >
@@ -130,9 +134,11 @@ export const RegisterPage: React.FC = () => {
                             </Button>
                         </div>
                     </form>
-                    <div className="register-link">
-                        <p className="text-sm">Already have an account?</p>
-                        <a className="text-sm" href="/login">
+                    <div className={styles["register-link"]}>
+                        <p className={styles["text-sm"]}>
+                            Already have an account?
+                        </p>
+                        <a className={styles["text-sm"]} href="/login">
                             Login
                         </a>
                     </div>

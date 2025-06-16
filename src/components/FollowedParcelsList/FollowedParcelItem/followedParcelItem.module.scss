@@ -19,6 +19,7 @@
     padding: 0.25rem 0.5rem;
     background-color: #f8f9fa;
     border-radius: 4px;
+    cursor: pointer;
   }
 
   .__date-time {
@@ -59,6 +60,15 @@
       color: #34495e;
     }
   }
+}
+
+.courier-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 @media (max-width: 768px) {

@@ -10,6 +10,7 @@ export interface Parcel {
     id: string;
     trackingNumber: string;
     status: string;
+    courier: string;
     factualWeight: number;
     fromLocation: string;
     toLocation: string;
@@ -86,8 +87,6 @@ export const TrackApi = {
         if (!response.data) {
             throw new Error("Failed to fetch all parcels");
         }
-
-        console.log("All parcels:", response.data);
 
         return response.data;
     },

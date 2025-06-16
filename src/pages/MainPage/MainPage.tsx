@@ -3,7 +3,7 @@ import { Input } from "@heroui/input";
 import { useRef, useState } from "react";
 import { Parcel, TrackApi, TrackParcelResponse } from "../../api/TrackApi";
 import { TrackList } from "../../components/Track/TrackList/TrackList";
-import "./mainPage.scss";
+import styles from "./mainPage.module.scss";
 
 import { faqItems } from "../../data/faq";
 import { partners } from "../../data/partners";
@@ -61,19 +61,22 @@ export const MainPage: React.FC = () => {
     };
 
     return (
-        <div className="main-container">
-            <section ref={topRef} className="track-section">
-                <div className="track-content">
-                    <h1 className="track-title">
+        <div className={styles["main-container"]}>
+            <section ref={topRef} className={styles["track-section"]}>
+                <div className={styles["track-content"]}>
+                    <h1 className={styles["track-title"]}>
                         Відстеження поштових відправлень по Україні
                     </h1>
-                    <p className="track-description">
+                    <p className={styles["track-description"]}>
                         Пошук поштових відправлень Нової Пошти, Міст Експрес та
                         інших компаній
                     </p>
-                    <form className="track-form" onSubmit={handleTrack}>
+                    <form
+                        className={styles["track-form"]}
+                        onSubmit={handleTrack}
+                    >
                         <Input
-                            className="track-input"
+                            className={styles["track-input"]}
                             placeholder="Введіть трек-номер посилки"
                             onChange={handleInputChange}
                             size="lg"
@@ -82,35 +85,44 @@ export const MainPage: React.FC = () => {
                             type="submit"
                             color="primary"
                             size="lg"
-                            className="tracking-button"
+                            className={styles["tracking-button"]}
                         >
                             ВІДСТЕЖИТИ
                         </Button>
                     </form>
-                    {error && <div className="error-message">{error}</div>}
+                    {error && (
+                        <div className={styles["error-message"]}>{error}</div>
+                    )}
                 </div>
             </section>
 
-            <section className="track-list-section">
-                <div className="track-list-content">
-                    <h2 className="track-list-title">Останні трекінги</h2>
+            <section className={styles["track-list-section"]}>
+                <div className={styles["track-list-content"]}>
+                    <h2 className={styles["track-list-title"]}>
+                        Останні трекінги
+                    </h2>
                 </div>
                 {parcel && <TrackList parcel={parcel} />}
             </section>
 
-            <section className="partners-section">
-                <div className="partners-content">
-                    <h2 className="partners-title">Наші партнери</h2>
-                    <div className="partners-grid">
+            <section className={styles["partners-section"]}>
+                <div className={styles["partners-content"]}>
+                    <h2 className={styles["partners-title"]}>Наші партнери</h2>
+                    <div className={styles["partners-grid"]}>
                         {partners.map((partner) => (
-                            <div key={partner.id} className="partner-card">
+                            <div
+                                key={partner.id}
+                                className={styles["partner-card"]}
+                            >
                                 <img
                                     src={partner.logo}
                                     alt={partner.name}
-                                    className="partner-logo"
+                                    className={styles["partner-logo"]}
                                 />
-                                <h3 className="partner-name">{partner.name}</h3>
-                                <p className="partner-description">
+                                <h3 className={styles["partner-name"]}>
+                                    {partner.name}
+                                </h3>
+                                <p className={styles["partner-description"]}>
                                     {partner.description}
                                 </p>
                             </div>
@@ -119,28 +131,32 @@ export const MainPage: React.FC = () => {
                 </div>
             </section>
 
-            <section className="faq-section">
-                <div className="faq-content">
-                    <h2 className="faq-title">Довідкова інформація</h2>
-                    <div className="faq-grid">
+            <section className={styles["faq-section"]}>
+                <div className={styles["faq-content"]}>
+                    <h2 className={styles["faq-title"]}>
+                        Довідкова інформація
+                    </h2>
+                    <div className={styles["faq-grid"]}>
                         {faqItems.map((item) => (
-                            <div key={item.id} className="faq-card">
-                                <h3 className="faq-question">
+                            <div key={item.id} className={styles["faq-card"]}>
+                                <h3 className={styles["faq-question"]}>
                                     {item.question}
                                 </h3>
-                                <p className="faq-answer">{item.answer}</p>
+                                <p className={styles["faq-answer"]}>
+                                    {item.answer}
+                                </p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section className="track-again-section">
-                <div className="track-again-content">
-                    <h2 className="track-again-title">
+            <section className={styles["track-again-section"]}>
+                <div className={styles["track-again-content"]}>
+                    <h2 className={styles["track-again-title"]}>
                         Відстежте вашу посилку
                     </h2>
-                    <p className="track-again-text">
+                    <p className={styles["track-again-text"]}>
                         На цьому сайті можна простежити посилку, міжнародне
                         відправлення та вантаж по Україні. Для цього введіть у
                         поле вище трек-номер, або натисніть кнопку «Відстежити».
@@ -148,7 +164,7 @@ export const MainPage: React.FC = () => {
                     <Button
                         color="primary"
                         size="lg"
-                        className="track-again-button"
+                        className={styles["track-again-button"]}
                         onPress={scrollToTop}
                     >
                         ВІДСТЕЖИТИ
