@@ -79,13 +79,13 @@ export const HeaderProfile: React.FC<HeaderProfileProps> = ({ user }) => {
                     className={styles["dropdown-item"]}
                     onClick={handleFollowedParcels}
                 >
-                    Followed Parcels
+                    Відстежувані посилки
                 </div>
                 <div className={styles["dropdown-item"]} onClick={handleAPI}>
-                    API
+                    Для розробників
                 </div>
                 <div className={styles["dropdown-item"]} onClick={handleLogout}>
-                    Logout
+                    Вийти з акаунту
                 </div>
             </div>
         </div>

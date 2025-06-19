@@ -24,11 +24,22 @@ export interface MovementHistoryEvent {
     timestamp: string;
 }
 
+const parcelCache: Record<
+    string,
+    { data: TrackParcelResponse; expires: number }
+> = {};
+const CACHE_TTL_MS = 3 * 60 * 1000;
+
 export const TrackApi = {
     trackParcel: async (
         trackingNumber: string,
         userId?: string
     ): Promise<TrackParcelResponse> => {
+        const cacheKey = trackingNumber + (userId ? `_${userId}` : "");
+        const now = Date.now();
+        if (parcelCache[cacheKey] && parcelCache[cacheKey].expires > now) {
+            return parcelCache[cacheKey].data;
+        }
         const response = await API.post("/track", {
             trackingNumber: trackingNumber,
             userId: userId,
@@ -37,7 +48,12 @@ export const TrackApi = {
         if (!response.data) {
             throw new Error("Failed to fetch tracking information");
         }
-
+        if (response.data.success) {
+            parcelCache[cacheKey] = {
+                data: response.data as TrackParcelResponse,
+                expires: now + CACHE_TTL_MS,
+            };
+        }
         return response.data as TrackParcelResponse;
     },
 

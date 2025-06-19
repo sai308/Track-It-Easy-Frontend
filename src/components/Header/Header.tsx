@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
                                     color="primary"
                                     size="lg"
                                 >
-                                    Login
+                                    Увійти
                                 </Button>
                                 <Button
                                     variant="solid"
@@ -48,7 +48,7 @@ export const Header: React.FC = () => {
                                     color="primary"
                                     size="lg"
                                 >
-                                    Register
+                                    Зареєструватися
                                 </Button>
                             </div>
                         )}

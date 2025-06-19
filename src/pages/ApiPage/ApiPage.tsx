@@ -70,6 +70,15 @@ const ApiPage: React.FC = () => {
                             {loading ? "Генеруємо..." : "Згенерувати API ключ"}
                         </button>
                     )}
+                    <div className={styles["api-repo-link"]}>
+                        <a
+                            href="https://github.com/TRITONKOR/Track-It-Easy-Backend"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            🌐 View project on GitHub
+                        </a>
+                    </div>
                 </div>
                 {user && (
                     <div className={styles["api-key-block"]}>

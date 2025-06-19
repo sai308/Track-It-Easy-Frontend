@@ -62,7 +62,7 @@ export const RegisterPage: React.FC = () => {
                     />
                 </div>
                 <div className={styles["form-container"]}>
-                    <h1>Create Account</h1>
+                    <h1>Створення акаунта</h1>
                     {submitError && (
                         <div className={styles["error-message"]}>
                             {submitError}
@@ -76,7 +76,7 @@ export const RegisterPage: React.FC = () => {
                             <Input
                                 className={styles["form-input"]}
                                 isRequired
-                                placeholder="Username"
+                                placeholder="Логін"
                                 type="text"
                                 value={formData.username}
                                 onChange={(e) => handleChange(e, "username")}
@@ -90,7 +90,7 @@ export const RegisterPage: React.FC = () => {
                             <Input
                                 className={styles["form-input"]}
                                 isRequired
-                                placeholder="Email"
+                                placeholder="Електронна пошта"
                                 type="email"
                                 value={formData.email}
                                 onChange={(e) => handleChange(e, "email")}
@@ -98,7 +98,7 @@ export const RegisterPage: React.FC = () => {
                             <Input
                                 className={styles["form-input"]}
                                 isRequired
-                                placeholder="Password"
+                                placeholder="Пароль"
                                 type="password"
                                 value={formData.password}
                                 onChange={(e) => handleChange(e, "password")}
@@ -112,7 +112,7 @@ export const RegisterPage: React.FC = () => {
                             <Input
                                 className={styles["form-input"]}
                                 isRequired
-                                placeholder="Confirm Password"
+                                placeholder="Підтвердження паролю"
                                 type="password"
                                 value={formData.confirmPassword}
                                 onChange={(e) =>
@@ -130,16 +130,14 @@ export const RegisterPage: React.FC = () => {
                                 color="primary"
                                 type="submit"
                             >
-                                Create account
+                                Створити акаунт
                             </Button>
                         </div>
                     </form>
                     <div className={styles["register-link"]}>
-                        <p className={styles["text-sm"]}>
-                            Already have an account?
-                        </p>
+                        <p className={styles["text-sm"]}>Вже маєте акаунт?</p>
                         <a className={styles["text-sm"]} href="/login">
-                            Login
+                            Увійти
                         </a>
                     </div>
                 </div>

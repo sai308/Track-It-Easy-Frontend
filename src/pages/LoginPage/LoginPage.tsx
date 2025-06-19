@@ -27,7 +27,7 @@ export const LoginPage: React.FC = () => {
         <div className={styles["login-container"]}>
             <div className={styles["login-section"]}>
                 <div className={styles["form-container"]}>
-                    <h1>Hello Again!</h1>
+                    <h1>Вітаємо знову!</h1>
                     {error && (
                         <div className={styles["error-message"]}>
                             {error}
@@ -47,14 +47,14 @@ export const LoginPage: React.FC = () => {
                             <Input
                                 className={styles["form-input"]}
                                 isRequired
-                                placeholder="Email"
+                                placeholder="Електронна пошта"
                                 type="email"
                                 onChange={clearError}
                             />
                             <Input
                                 className={styles["form-input"]}
                                 isRequired
-                                placeholder="Password"
+                                placeholder="Пароль"
                                 type="password"
                                 onChange={clearError}
                             />
@@ -63,16 +63,14 @@ export const LoginPage: React.FC = () => {
                                 color="primary"
                                 type="submit"
                             >
-                                Sign in
+                                Увійти
                             </Button>
                         </div>
                     </form>
                     <div className={styles["register-link"]}>
-                        <p className={styles["text-sm"]}>
-                            Don't have an account?
-                        </p>
+                        <p className={styles["text-sm"]}>Ще не маєте акаунт?</p>
                         <a className={styles["text-sm"]} href="/register">
-                            Register
+                            Зареєструватися
                         </a>
                     </div>
                 </div>
