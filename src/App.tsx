@@ -1,4 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Footer from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
 import { AuthProvider } from "./context/AuthContext";
 import { AdminPage } from "./pages/AdminPage/AdminPage";
@@ -39,6 +40,9 @@ function App() {
                                 element={<div>404 Not Found</div>}
                             />
                         </Routes>
+                    </div>
+                    <div className="app-footer">
+                        <Footer />
                     </div>
                 </div>
             </AuthProvider>

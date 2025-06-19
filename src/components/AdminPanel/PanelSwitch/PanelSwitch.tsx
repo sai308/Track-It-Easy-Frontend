@@ -19,7 +19,9 @@ const PanelSwitch: React.FC = () => {
 
     return (
         <Button color="primary" size="lg" onPress={handleSwitch}>
-            {isAdminPanel ? "Go to User Panel" : "Go to Admin Panel"}
+            {isAdminPanel
+                ? "Перейти до панелі користувача"
+                : " Перейти до адмін-панель"}
         </Button>
     );
 };
