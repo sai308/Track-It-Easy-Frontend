@@ -39,7 +39,9 @@ export const TrackDetails: React.FC<{ package: PackageDetails }> = ({
     };
 
     return (
-        <div className={styles["track-details"]}>
+        <div
+            className={`${styles["track-details"]} ${styles["track-details-appear"]}`}
+        >
             <div className={styles["track-details__header"]}>
                 <h1 className={styles["track-details__number"]}>
                     {pkg.trackingNumber}
@@ -75,39 +77,37 @@ export const TrackDetails: React.FC<{ package: PackageDetails }> = ({
             </div>
 
             <div className={styles["track-details__info"]}>
-                <div className={styles["info-card"]}>
-                    <span className={styles["info-card__label"]}>
-                        Днів у дорозі:
-                    </span>
-                    <span className={styles["info-card__value"]}>
-                        {pkg.daysInTransit}
-                    </span>
-                </div>
-
-                <div className={styles["info-card"]}>
-                    <span className={styles["info-card__label"]}>
-                        Відправник:
-                    </span>
-                    <span className={styles["info-card__value"]}>
-                        {pkg.fromLocation}
-                    </span>
-                </div>
-
-                <div className={styles["info-card"]}>
-                    <span className={styles["info-card__label"]}>
-                        Отримувач:
-                    </span>
-                    <span className={styles["info-card__value"]}>
-                        {pkg.toLocation}
-                    </span>
-                </div>
-
-                <div className={styles["info-card"]}>
-                    <span className={styles["info-card__label"]}>Вага:</span>
-                    <span className={styles["info-card__value"]}>
-                        {pkg.weight}
-                    </span>
-                </div>
+                {[
+                    {
+                        label: "Днів у дорозі:",
+                        value: pkg.daysInTransit,
+                    },
+                    {
+                        label: "Відправник:",
+                        value: pkg.fromLocation,
+                    },
+                    {
+                        label: "Отримувач:",
+                        value: pkg.toLocation,
+                    },
+                    {
+                        label: "Вага:",
+                        value: pkg.weight,
+                    },
+                ].map((item, index) => (
+                    <div
+                        key={index}
+                        className={`${styles["info-card"]} ${styles["info-card-appear"]}`}
+                        style={{ animationDelay: `${index * 150}ms` }}
+                    >
+                        <span className={styles["info-card__label"]}>
+                            {item.label}
+                        </span>
+                        <span className={styles["info-card__value"]}>
+                            {item.value}
+                        </span>
+                    </div>
+                ))}
             </div>
         </div>
     );
