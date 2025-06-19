@@ -37,6 +37,8 @@ export const TrackList: React.FC<TrackListProps> = ({ parcel }) => {
                             description={event.description}
                             timestamp={event.timestamp}
                             courier={parcel.courier}
+                            className={styles["track-item-appear"]}
+                            style={{ animationDelay: `${index * 100}ms` }}
                         />
                     ))}
                 </div>

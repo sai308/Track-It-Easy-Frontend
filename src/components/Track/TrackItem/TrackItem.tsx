@@ -10,6 +10,8 @@ interface TrackEventItemProps {
     description: string;
     timestamp: string;
     courier: string;
+    className?: string;
+    style?: React.CSSProperties;
 }
 
 export const TrackItem: React.FC<TrackEventItemProps> = (data) => {
@@ -33,7 +35,12 @@ export const TrackItem: React.FC<TrackEventItemProps> = (data) => {
     }
 
     return (
-        <div className={`${styles["track-item-container"]} ${data.status}`}>
+        <div
+            className={`${styles["track-item-container"]} ${
+                styles[data.status]
+            } ${data.className ? data.className : ""}`}
+            style={data.style}
+        >
             <div className={styles["date-time"]}>
                 <span className={styles["date"]}>{formatDate(eventDate)}</span>
                 <span className={styles["time"]}>{formatTime(eventDate)}</span>
